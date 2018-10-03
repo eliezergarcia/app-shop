@@ -23,7 +23,7 @@
                     <thead>
                         <tr>
                             <th class="text-center">
-                                #
+                                Imágen
                             </th>
                             <th>
                                 Nombre
@@ -40,7 +40,7 @@
                         @foreach($categories as $category)
                         <tr>
                             <td class="text-center" width="5%">
-                                {{ $category->id }}
+                                <img src="{{ $category->featured_image_url }}" width="50px" height="50px">
                             </td>
                             <td width="15%">
                                 {{ $category->name }}

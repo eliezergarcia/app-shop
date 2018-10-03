@@ -186,14 +186,15 @@
                     <h4 class="text-center description">
                         Regístrate ingresando tus datos básicos, y podrás realizar tus pedidos a través de nuestro carrito de compras. Si aún no te decides, de todas formas, con tu cuenta de usuario podrás hacer todas tus consultas sin compromiso.
                     </h4>
-                    <form class="contact-form">
+                    <form class="contact-form" href="{{ route('register') }}" method="GET">
+                        {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">
                                         Nombre
                                     </label>
-                                    <input class="form-control" type="email">
+                                    <input class="form-control" type="text">
                                     </input>
                                 </div>
                             </div>
@@ -207,17 +208,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="bmd-label-floating" for="exampleMessage">
-                                Tu mensaje
-                            </label>
-                            <textarea class="form-control" id="exampleMessage" rows="4" type="email">
-                            </textarea>
-                        </div>
                         <div class="row">
                             <div class="col-md-4 ml-auto mr-auto text-center">
-                                <button class="btn btn-primary btn-raised">
-                                    Enviar mensaje
+                                <button class="btn btn-primary btn-raised" type="submit">
+                                    Iniciar registro
                                 </button>
                             </div>
                         </div>

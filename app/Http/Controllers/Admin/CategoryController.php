@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use File;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,7 +40,21 @@ class CategoryController extends Controller
      */
     public function store(RegisterCategoryRequest $request)
     {
-           Category::create($request->all());
+           $category = Category::create($request->only('name', 'description'));
+
+           if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $path = public_path() . '/images/categories';
+                $fileName = uniqid() . '-' . $file->getClientOriginalName();
+                $moved = $file->move($path, $fileName);
+
+
+                if ($moved) {            
+                    $category->image = $fileName;                
+                    $category->save();
+                }
+           }
+
            return redirect()->route('categories.index');
     }
 
@@ -76,7 +91,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Category::findOrFail($id)->update($request->all());
+        $category = Category::findOrFail($id);
+        $category->update($request->only('name', 'description'));
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = public_path() . '/images/categories';
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $moved = $file->move($path, $fileName);
+
+
+            if ($moved) {            
+                $previousPath = $path . '/' . $category->image;
+
+                $category->image = $fileName;                
+                $saved = $category->save();
+
+                if ($saved) {
+                    File::delete($previousPath);
+                }
+            }
+       }
 
         return redirect()->route('categories.index');
     }

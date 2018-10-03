@@ -13,7 +13,7 @@
             <h2 class="title text-center">
                 Editar categoría seleccionado
             </h2>
-            <form action="{{ route('categories.update', $category->id) }}" method="POST">
+            <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                 {!! method_field('PUT') !!}
                 {{ csrf_field() }}
                 <div class="row">
@@ -44,6 +44,15 @@
                             </span>
                             @endif
                         </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="control-label" for="image">
+                            Imágen de la categoría
+                        </label>
+                        <input id="image" name="image" type="file">  
+                        @if($category->image)
+                            <p class="help-block">Subir sólo si desea remplazar la <a href="{{ asset('/images/categories/'.$category->image) }}" target="_blank">imágen actual</a></p>                          
+                        @endif
                     </div>
                 </div>
                 <div class="form-group">

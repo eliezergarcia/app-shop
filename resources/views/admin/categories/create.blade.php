@@ -13,7 +13,7 @@
             <h2 class="title text-center">
                 Registrar nueva categoría
             </h2>
-            <form action="{{ route('categories.store') }}" method="POST">
+            <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-sm-6">
@@ -45,6 +45,10 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
+                        <label class="control-label" for="image">
+                            Imágen de la categoría
+                        </label>
+                        <input id="image" name="image" type="file">                            
                     </div>
                 </div>
                 <div class="form-group">
