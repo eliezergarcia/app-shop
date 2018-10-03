@@ -11,11 +11,11 @@
     <div class="container-fluid">
         <div class="section text-center">
             <h2 class="title">
-                Lista de productos
+                Listado de categorías
             </h2>
             <div class="team">
-                <a class="btn btn-primary btn-round" href="{{ url('admin/products/create') }}">
-                    Nuevo producto
+                <a class="btn btn-primary btn-round" href="{{ route('categories.create') }}">
+                    Nueva categoría
                 </a>
                 <br>
                 </br>
@@ -31,52 +31,36 @@
                             <th>
                                 Descripción
                             </th>
-                            <th>
-                                Categoría
-                            </th>
-                            <th class="text-right">
-                                Precio
-                            </th>
                             <th class="text-right">
                                 Opciones
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($products as $product)
+                        @foreach($categories as $category)
                         <tr>
                             <td class="text-center" width="5%">
-                                {{ $product->id }}
+                                {{ $category->id }}
                             </td>
                             <td width="15%">
-                                {{ $product->name }}
+                                {{ $category->name }}
                             </td>
                             <td>
-                                {{ $product->description }}
-                            </td>
-                            <td width="7%">
-                                {{ $product->category_name }}
-                            </td>
-                            <td class="text-right" width="7%">
-                                $ {{ $product->price }}
+                                {{ $category->description }}
                             </td>
                             <td class="td-actions text-right" width="15%">
-                                <a class="btn btn-info btn-link btn-fab" rel="tooltip" title="Ver producto" href="{{ route('products.show', $product->id) }}" target="_blank">
+                                <button class="btn btn-info btn-link btn-fab" rel="tooltip" title="Ver categoría" type="button">
                                     <i class="fa fa-info">
                                     </i>
-                                </a>
-                                <a class="btn btn-success btn-link btn-fab" href="{{ route('products.edit', $product->id) }}" rel="tooltip" title="Editar producto">
+                                </button>
+                                <a class="btn btn-success btn-link btn-fab" href="{{ route('categories.edit', $category->id) }}" rel="tooltip" title="Editar categoría">
                                     <i class="fa fa-edit">
                                     </i>
                                 </a>
-                                <a class="btn btn-warning btn-link btn-fab" href="{{ route('products.images.index', $product->id) }}" rel="tooltip" title="Imágenes del producto">
-                                    <i class="fa fa-image">
-                                    </i>
-                                </a>
-                                <form name="delete-product" style="display: inline;" action="{{ route('products.destroy', $product->id) }}" method="post">
+                                <form name="delete-product" style="display: inline;" action="{{ route('categories.destroy', $category->id) }}" method="post">
                                     {!! csrf_field() !!}
                                     {!! method_field('DELETE') !!}
-                                    <button class="btn btn-danger btn-link btn-fab" rel="tooltip" title="Eliminar producto" type="submit"><i class="fa fa-times"></i></button>
+                                    <button class="btn btn-danger btn-link btn-fab" rel="tooltip" title="Eliminar categoría" type="submit"><i class="fa fa-times"></i></button>
                                 </form>
                             </td>
                         </tr>
@@ -85,7 +69,7 @@
                 </table>
             </div>
             <div style="display: inline-flex;">
-                {{ $products->links() }}
+                {{ $categories->links() }}
             </div>
         </div>
     </div>

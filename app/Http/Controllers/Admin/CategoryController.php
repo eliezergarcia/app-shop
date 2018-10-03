@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Product;
 use App\Category;
-use App\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateProductRequest;
-use App\Http\Requests\RegisterProductRequest;
+use App\Http\Requests\RegisterCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
-
-        return view('admin.products.index')->with(compact('products'));
+        $categories = Category::paginate(10);
+        return view('admin.categories.index')->with(compact('categories'));
     }
 
     /**
@@ -31,9 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::orderBy('name')->get();
-
-        return view('admin.products.create')->with(compact('categories'));
+        return view('admin.categories.create');
     }
 
     /**
@@ -42,11 +37,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegisterProductRequest $request)
+    public function store(RegisterCategoryRequest $request)
     {
-        Product::create($request->all());
-
-        return redirect('/admin/products');
+           Category::create($request->all());
+           return redirect()->route('categories.index');
     }
 
     /**
@@ -68,11 +62,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
+        $category = Category::findOrFail($id);
 
-        $categories = Category::orderBy('name')->get();
-
-        return view('admin.products.edit')->with(compact('product', 'categories'));
+        return view('admin.categories.edit')->with(compact('category'));
     }
 
     /**
@@ -82,11 +74,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        Product::findOrFail($id)->update($request->all());
+        Category::findOrFail($id)->update($request->all());
 
-        return redirect('/admin/products');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -97,12 +89,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        Category::findOrFail($id)->delete();
 
-        // return $id;
-        ProductImage::where('product_id', $id)->delete();
-
-        Product::findOrFail($id)->delete();
-
-        return back();
+        return redirect()->route('categories.index');
     }
 }

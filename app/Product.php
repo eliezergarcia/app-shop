@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
-	protected $fillable = ['name', 'price', 'description', 'long_description'];
+	protected $fillable = ['name', 'price', 'description', 'long_description', 'category_id'];
 
     public function category()
     {
@@ -32,5 +32,14 @@ class Product extends Model
     	}
 
     	return '/images/products/default.png';
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        if ($this->category) {
+            return $this->category->name;
+        }
+
+        return 'General';
     }
 }

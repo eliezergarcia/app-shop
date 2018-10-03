@@ -100,6 +100,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <p><h4><b>Importe a pagar: </b> $ {{ auth()->user()->cart->total }}</h4></p>
             </div>
 
             <div class="row justify-content-center">

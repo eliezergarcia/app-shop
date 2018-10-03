@@ -74,31 +74,69 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group bmd-form-group{{ $errors->has('description') ? ' has-danger' : 'has-success' }}">
-                    @if ($errors->has('description'))
-                    <label class="bmd-label-floating" for="description">
-                        {{ $errors->first('description') }}
-                    </label>
-                    @else
-                    <label class="bmd-label-floating" for="description">
-                        Descripción corta
-                    </label>
-                    @endif
-                    <input class="form-control" id="description" name="description" type="text" value="{{ old('description', $product->description) }}">
-                    </input>
-                    @if ($errors->has('description'))
-                    <span class="form-control-feedback">
-                        <i class="material-icons">
-                            clear
-                        </i>
-                    </span>
-                    @else
-                    <span class="form-control-feedback">
-                        <i class="material-icons">
-                            done
-                        </i>
-                    </span>
-                    @endif
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group bmd-form-group{{ $errors->has('description') ? ' has-danger' : 'has-success' }}">
+                            @if ($errors->has('description'))
+                            <label class="bmd-label-floating" for="description">
+                                {{ $errors->first('description') }}
+                            </label>
+                            @else
+                            <label class="bmd-label-floating" for="description">
+                                Descripción del producto
+                            </label>
+                            @endif
+                            <input class="form-control" id="description" name="description" type="text" value="{{ old('description', $product->description) }}">
+                            </input>
+                            @if ($errors->has('description'))
+                            <span class="form-control-feedback">
+                                <i class="material-icons">
+                                    clear
+                                </i>
+                            </span>
+                            @else
+                            <span class="form-control-feedback">
+                                <i class="material-icons">
+                                    done
+                                </i>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                         <div class="form-group bmd-form-group{{ $errors->has('category_id') ? ' has-danger' : 'has-success' }}">
+                            @if ($errors->has('category_id'))
+                            <label class="bmd-label-floating" for="category_id">
+                                {{ $errors->first('category_id') }}
+                            </label>
+                            @else
+                            <label class="bmd-label-floating" for="category_id">
+                                Categoría
+                            </label>
+                            @endif
+                            <select class="form-control" id="category_id" name="category_id" type="text">
+                                <option value="0">General</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" @if($category->id == old('category_id', $product->category_id)) selected @endif>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('category_id'))
+                            <span class="form-control-feedback">
+                                <i class="material-icons">
+                                    clear
+                                </i>
+                            </span>
+                            @else
+                            <span class="form-control-feedback">
+                                <i class="material-icons">
+                                    done
+                                </i>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <textarea class="form-control" name="long_description" placeholder="Descripción extensa del producto" rows="5">{{ old('long_description', $product->long_description) }}</textarea>
