@@ -71,11 +71,11 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function showRegistrationForm(Request $request)
-    {
-        return $request->all();
-        // $name = $request->input('name');
-        // $email = $request->input('email');
-        // return view('auth.register')->with(compact('name', 'email'));
-    }
+    // public function showRegistrationForm(Request $request)
+    // {
+    //     return $request->all();
+    //     // $name = $request->input('name');
+    //     // $email = $request->input('email');
+    //     // return view('auth.register')->with(compact('name', 'email'));
+    // }
 }
